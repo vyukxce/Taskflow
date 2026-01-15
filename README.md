@@ -11,12 +11,19 @@
 ->Clean component separation
 
 <b>Tech Stack</b>
+<br/>
 -> React
+<br/>
 -> JavaScript
+<br/>
 -> CSS / Tailwind
 
 <b>Key Concepts Used</b>
+<br/>
 -> Derived state
+<br/>
 -> Lifting state up
+<br/>
 -> Controlled components
+<br/>
 -> Immutability
