@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState , useEffect, useRef} from "react";
 import TaskList from "./components/TaskList.jsx"
 import TaskStats from "./components/TaskStats.jsx"
 import React from 'react'
@@ -6,6 +6,23 @@ import React from 'react'
 const App = () => {
   const [tasks, setTask] = useState([]);
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if(storedTasks){
+      setTask(storedTasks);
+    }
+  }, [])
+
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+  if (isFirstRender.current) {
+    isFirstRender.current = false;
+    return;
+  }
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}, [tasks]);
 
   const addTask = (name)=>
   {
@@ -23,7 +40,7 @@ const App = () => {
     }
   const filterTasks = tasks.filter(task=>{
     if(filter === "completed") return task.done;
-    if(filter === "pending") return !task.done;
+    if(filter === "pending") return !task.done; 
     return true;
   })
 
